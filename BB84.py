@@ -1,71 +1,31 @@
 
-from cqc.pythonLib import CQCConnection, qubit
-import numpy as np
-#import BitVector
 """
-BB84 protocol description:
-Protocol 1 — BB84 QKD (no noise). Outputs k ∈ {0,1}
-`
-to both Alice and Bob. Alice and
-Bob execute the following:
-1. For a small real-valued parameter η  1, and a large integer n  1, Alice chooses a string
-x = x1,..., xN ∈ {0,1}
-N uniformly at random where N = (4+η)n. She also chooses a
-basis string θ = θ1,...,θN uniformly at random. She sends to Bob each bit xj by encoding
-it in a quantum state according to the basis θj
-: H
-θj
-|xji.
-2. Bob chooses a basis string θ˜ = θ˜
-1,...,θ˜
-N uniformly at random. He measures qubit j in
-the basis θ˜
-j
-to obtain outcome ˜xj
-. This gives him a string ˜x = x˜1,..., x˜N.
-3. Bob tells Alice over the CAC that he has received and measured all the qubits.
-4. Alice and Bob tell each other over the CAC their basis strings θ and θ˜ respectively.
-5. Alice and Bob discard all rounds j in which they didn’t measure in the same basis. Let
-S = { j|θj = θ˜
-j} denote the indices of the rounds in which they measured in the same
-basis. Since Alice and Bob chose θ,θ˜ at random, for large values of n, they throw away
-roughly N/2 ≈ 2n bits.
-6. Alice picks a random subseta T ⊆ S for testing and tells Bob T over the CAC. That is,
-Alice and Bob test roughly |T| ≈ N/4 ≈ n bits.
-7. Alice and Bob announce xT and x˜T to each other over the CAC, where we denote by xT
-the substring of x corresponding to the indices in the test set T. They compute the error
-rate δ = W/|T|, where W = |{ j ∈ T | xj 6= x˜j}| is the number of errors when Alice and
-Bob did measure in the same basis.
-8. If the error rate δ 6= 0 , then Alice and Bob abort the protocol. Otherwise, they proceed to
-denote xremain = xS\T and x˜remain = x˜S\T as the remaining bits, i.e., the bits where Alice
-and Bob measured in the same basis, but which they did not use for testing. The length of
-xremain and ˜xremain is approximately n bits.
-9. Alice and Bob perform privacy amplification: Alice picks a random r, and computes
-k = Ext(xremain,r). She sends r to Bob, who computes k = Ext(x˜remain,r).
-aA random subset T of S is where each element in S is included in T with probability 1/2. By this definition, if
-|S| is large, then |T| ≈ |S|/2
-
+BB84 protocol
 author :FerjaniMY
 email:ferjanimedyassine@gmail.com
 
 """
+
+
+from cqc.pythonLib import CQCConnection, qubit
+import numpy as np
+import random
 
 def prepare_qubits(Sender,receiver,key_bit):
    
    q=qubit(Sender)
    S_basis="" # The sender basis
 
-   if key_bit == 1:  #prepare qubits in |1> state
+   if key_bit =='1':  #prepare qubits in |1> state
     q.X() #apply X gate
-   else:
-    pass
+   
    # convert  to  Hadamard  basis randomly
    if 0.5 < np.random.random(): 
     q.H() #apply hadamard gate
     S_basis='H'
    else:
     S_basis='S'
-    pass
+   
    Sender.sendQubit(q,receiver)
 
    return [q,S_basis]
@@ -82,24 +42,76 @@ def receive_qubits(Receiver):
    C='H'
   else:
    C='S' #S: Standard Basis
-   pass
+  
+  m=q.measure()
+   
   # Measure  the  qubit  in the  standard
   # basis  and  store  the  outcome  in m
-  m=q.measure ()
+  
   return [m,C]
+
+def raw_key(A_basis,B_basis,key): 
+ correct_basis=[]
+ raw_key=[]
+
+ for i in range(len(A_basis)):
+  if A_basis[i]==B_basis[i]:
+    correct_basis.append(i)
+    raw_key.append(key[i])
+  else:
+    pass 
+ return raw_key,correct_basis
+ 
+#def reconciliation(keyA,keyB):
+ 
+
+
+
+
+"""
+def error_rate(keyA,keyB):
+ s=0 
+ for i in range(keyA): 
+  if keyA[i]!=keyB[i]:
+   s+=1
+ e=s/len(keyA)
+ return e
+
 
 def check_basis(A_basis,B_basis):
  correct_basis=[]
  discarded=[]
- 
- for i in A_basis:
-  for j in B_basis:
-   if i==j:
+ for i,b in enumerate(zip(A_basis,B_basis)):
+   if b[0]==b[1]
     correct_basis.append(i)
    else:
     discarded.append(i)
  return correct_basis,discarded
+def check_errors(self, test_bits, peer_test_bits):
+        number_of_errors = len([i for i in range(len(test_bits)) if test_bits[i] != peer_test_bits[i]])
+        delta = number_of_errors/len(test_bits)
 
-#def privacy_amplification(key): #key : list
+def priv_amp(sender,receiver,k): #key=list
+ 
+ l=[]
+ 
+ #x=random.sample(k, 2)#Choose randomly two bit of the key
+ i=random.randint(0,len(k)-1)
+ j=random.randint(0,len(k)-1) 
+ while(len(k)!=0):
+  if i!=j:
+   x=int(k[i])
+   del k[i] #delete
+   y=int(k[j])
+   del k[i]
+   xor=(x+y)%2
+   inf=[i,j,xor]
+   l.append(inf)
+   sender.sendClassical(receiver,inf) #send two positions and their xor
+  
+# return l
+"""
+#def reconciliation
+#def error_correction
 #def detect_Eve
 #def QRNG() Quantum Random number generator   

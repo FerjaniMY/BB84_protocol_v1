@@ -50,17 +50,17 @@ def receive_qubits(Receiver):
   
   return [m,C]
 
-def raw_key(A_basis,B_basis,key): 
+def sifted_key(A_basis,B_basis,key): 
  correct_basis=[]
  raw_key=[]
 
  for i in range(len(A_basis)):
   if A_basis[i]==B_basis[i]:
     correct_basis.append(i)
-    raw_key.append(key[i])
+    sifted_key.append(key[i])
   else:
     pass 
- return raw_key,correct_basis
+ return sifted_key,correct_basis
  
 #def reconciliation(keyA,keyB):
  

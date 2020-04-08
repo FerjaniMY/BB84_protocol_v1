@@ -1,4 +1,4 @@
-# BB84_protocol_v1
+# BB84 protocol QKD :
 
 ![](https://github.com/FerjaniMY/BB84_protocol_v1/blob/master/images/F1.png)
 

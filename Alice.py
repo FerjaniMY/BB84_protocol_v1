@@ -39,11 +39,11 @@ with CQCConnection("Alice") as Alice:
  B_basis=list(x.decode())
  #print("Bob basis received",B_basis)
  #print(B_basis.split(""))
- aa=raw_key(B,B_basis,m)
- print("Alice raw key",aa[0])
+ aa=sifted_key(B,B_basis,m)
+ print("Alice sifted key",aa[0])
  #R_ext = [random.randint(0, 1) for a in range(0, len(aa[0]))]
- pairs = random.sample(aa[0],len(aa[0])/2)
- print("Seed fqdkl,",pairs)
+ #pairs = random.sample(aa[0],len(aa[0])/2)
+ #print("Seed fqdkl,",pairs)
  
  #print('Bobs basis received//////',d)
  #Check matching basis

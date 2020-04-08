@@ -9,6 +9,7 @@ http://www.simulaqron.org/
 ![](https://d3i71xaburhd42.cloudfront.net/59a22ddee5a38458cbbf624091629ab3467954d3/4-Figure2-1.png)
 ### How to use ?
 ###### For linux :
-> run.sh :Execute Alice and Bob without Eavesdropping
-> run+Eve.sh :Execute Eve's attack 
+
+* run.sh :Execute Alice and Bob without Eavesdropping
+* run+Eve.sh :Execute Eve's attack 
 

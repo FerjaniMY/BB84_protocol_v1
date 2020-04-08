@@ -9,6 +9,6 @@ http://www.simulaqron.org/
 ![](https://d3i71xaburhd42.cloudfront.net/59a22ddee5a38458cbbf624091629ab3467954d3/4-Figure2-1.png)
 ### How to use ?
 ###### For linux :
-to run the protocol between Alice and Bob without Eve( Man in the middle) execute run.sh
-If you want to test Eve effect ,than u can try with run+Eve.sh
+> run.sh :Execute Alice and Bob without Eavesdropping
+> run+Eve.sh :Execute Eve's attack 
 

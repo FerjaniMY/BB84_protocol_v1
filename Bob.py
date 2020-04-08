@@ -33,7 +33,7 @@ with CQCConnection("Bob") as Bob:
  for c in res:
   key_s.append(key[c])
   
- print("Bob final raw key",key_s)
+ print("Bob sifted key",key_s)
 
  #check matching basis
  #print("Bob's key :",key)

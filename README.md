@@ -7,11 +7,10 @@
 * Generate raw key 
 * Sift the key 
 * Check the noise level
-### Next Implementation : BB84 ,version 2 :
-* Generate raw key 
-* Sift the key 
+### Next Implementations (features) :
 * Reduce and check the noise level (Reconciliation)
-
+* Reduce Eve’s information on the new key (privacy amplification)
+* • Authenticate the messages on the classical channel
 
 
 ###  Simulaqron 

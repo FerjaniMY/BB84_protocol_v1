@@ -7,7 +7,7 @@
 * Generate raw key 
 * Sift the key 
 * Check the noise level
-### BB84 ,version 2 features
+### Next Implementation : BB84 ,version 2 :
 * Generate raw key 
 * Sift the key 
 * Reduce and check the noise level (Reconciliation)

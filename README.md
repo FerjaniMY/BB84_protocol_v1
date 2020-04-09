@@ -10,7 +10,7 @@
 ### Next Implementations (features) :
 * Reduce and check the noise level (Reconciliation)
 * Reduce Eve’s information on the new key (privacy amplification)
-* • Authenticate the messages on the classical channel
+* Authenticate the messages on the classical channel
 
 
 ###  Simulaqron 

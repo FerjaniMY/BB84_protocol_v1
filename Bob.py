@@ -1,7 +1,8 @@
 from cqc.pythonLib import CQCConnection, qubit
 import numpy as np
 from BB84 import *
-from CAC.classical_comm import *
+import time
+import comm
 import ast
 
 # Establish  connection  to  SimulaQron
@@ -19,32 +20,62 @@ with CQCConnection("Bob") as Bob:
  
 
  #send Basis to Alice
- print("bob's initial key :",key)
+ #print("bob's initial key :",key)
  ff=B.encode()#conversion to byte
  Bob.sendClassical("Alice",ff)
  
  #receive Alice's basis
- a=Bob.recvClassical()
- x=a.decode()
- res = ast.literal_eval(x)
+ msg=Bob.recvClassical()
+
+ res =comm.bytes_to_list(msg)
  #print("Alice's Basis received",res)
- key_s=[]
+ key_s=''
  
  for c in res:
-  key_s.append(key[c])
+  key_s+=str(key[c])
   
  print("Bob sifted key",key_s)
+ 
+ time.sleep(1)
+ msg1=Bob.recvClassical()
+ tested_key_A=comm.bytes_to_list(msg1)
+ #print("Alice's tested key received",tested_key_A)
+ time.sleep(1)
+ msg2=Bob.recvClassical()
+ test_indices_A=comm.bytes_to_list(msg2)#test_indices from Alice
 
- #check matching basis
- #print("Bob's key :",key)
- #d=Bob.recvClassical()[0]
- #print("pri amp::::::",d)
- #raw key
- #test randomly some indices
- #error rate
- #decision abort or confirm protocol
+ #print("Test indices received",test_indices_A)
+  
+ test_key_B='' 
+ for i in test_indices_A:
+  test_key_B+=key_s[i]
+  
+ print("Bob tested key",test_key_B) 
+ ########################"Error Rate in tested keys####################################################
+ x=0
+ for i in range(len(test_key_B)):
+ 	if test_key_B[i]!=tested_key_A[i]:
+ 	 x+=1
+ 
+ error_rate=x/len(test_key_B)
+  
+ print("Error rate in tested bits: {}% .".format(error_rate))
 
- #send_message(Bob, "Alice",B)
+ ###################Privacy Amplification#####################################
+ sifted_key=[]
+ pk=Bob.recvClassical()
+ L=comm.bytes_to_list(pk)
+ for i in key_s:
+ 	sifted_key.append(int(i))
+ private_key=np.dot(sifted_key,L)#key_s is the sifted key
+ print("Bob private key :",private_key) 
+ f = open("B_key.txt", "a")
+ f.write(str(private_key))
+ f.close()
+
+
+ #############################################################################
+ 
  
  Bob.close()
 

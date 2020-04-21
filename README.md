@@ -20,6 +20,8 @@ http://www.simulaqron.org/
 ###### For linux :
 
 * run.sh :Execute Alice and Bob without Eavesdropping , generate 1 bit key ----> `sh run.sh`
+* run+Eve.sh : Execute Eve (Man in the middle attack) ------> `sh run+Eve.sh`
 * n_run.sh : run the program n times (n=10) in order to obtain n_bit key -----> `bash n_run.sh`
+
 
 

@@ -7,10 +7,11 @@
 * Generate raw key 
 * Sift the key 
 * Check the noise level
-### Next Implementations (features) :
 * Reduce and check the noise level (Reconciliation)
 * Reduce Eve’s information on the new key (privacy amplification)
+### Next Implementations (features) :
 * Authenticate the messages on the classical channel
+* implement all necessary steps for Eve's attack
 
 
 ###  Simulaqron 
@@ -20,6 +21,7 @@ http://www.simulaqron.org/
 ### How to use ?
 ###### For linux :
 
-* run.sh :Execute Alice and Bob without Eavesdropping
-* run+Eve.sh :Execute Eve's attack 
+* run.sh :Execute Alice and Bob without Eavesdropping , generate 1 bit key ----> `sh run.sh`
+* n_run.sh : run the program n times (n=10) in order to obtain n_bit key -----> `bash n_run.sh`
+
 

@@ -7,10 +7,11 @@
 * Generate raw key 
 * Sift the key 
 * Reduce Eve’s information on the new key (privacy amplification)
-### Next Implementations (features) :
+* Implement Eavesdropper attack
+### TO DO LIST :
 * Authenticate the messages on the classical channel
-* implement all necessary steps for Eve's attack
-* Simulate noisy qubits 
+* Simulate noisy qubits and implement error correctiong codes
+* Develop a new socket communication class 
 
 ###  Simulaqron 
 SimulaQron is an application level simulator for a quantum internet that allows you to program your own quantum internet applications. Explore how to realize software for a quantum internet connecting local quantum processors by quantum communication, and develop your own libraries and software engineering concepts suitable for a quantum internet.
